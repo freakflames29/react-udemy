@@ -5,10 +5,30 @@ import ExpensesFilter from "./ExpensesFilter";
 import { useState } from "react";
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState("2020");
+
   const filterChangeHandler = (year) => {
     setFilteredYear(year);
     console.log(year);
   };
+  //we are filtering the dates of the entered title and storing it filteredexpenses
+  const filteredExpenses = props.data.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
+  let ExpenseItems;
+
+  if (filteredExpenses.length > 0) {
+    ExpenseItems = filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id} // here we are adding key
+        name={expense.name}
+        price={expense.price}
+        date={expense.date}
+      />
+    ));
+  } else {
+    ExpenseItems = "No Expenses to show 😕";
+  }
 
   return (
     <Card className="expenses">
@@ -16,16 +36,7 @@ const Expenses = (props) => {
         selected={filteredYear}
         onFilterchange={filterChangeHandler}
       />
-      <ExpenseItem
-        name={props.data[0].name}
-        price={props.data[0].price}
-        date={props.data[0].date}
-      />
-      <ExpenseItem
-        name={props.data[1].name}
-        price={props.data[1].price}
-        date={props.data[1].date}
-      />
+      {ExpenseItems}
     </Card>
   );
 };

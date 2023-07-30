@@ -24,9 +24,10 @@ const ExpenseForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const formData = {
-      title: enteredTitle,
-      amount: enteredAmount,
+      name: enteredTitle,
+      price: enteredAmount,
       date: new Date(enteredDate),
+      id:Math.random()
     };
     // console.log(formData);
     props.onSaveformData(formData);
