@@ -11,7 +11,7 @@ function ExpenseItem(props) {
         <h2>{props.name}</h2>
       </div>
       <div className="expense-item__price">${props.price}</div>
-    </Card>
+    </Card> 
   );
 }
 export default ExpenseItem;
